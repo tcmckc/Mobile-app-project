@@ -20,7 +20,7 @@ const routeIcons = {
   "Delay": "time",
   "Map": "map",
   "Log in": "lock-closed",
-  "Favorite": "heart",
+  "My page": "person",
 };
 
 export default function App() {
@@ -49,7 +49,7 @@ export default function App() {
           <Tab.Screen name="Map" component={Map} />
 
           {isLoggedIn ?
-              <Tab.Screen name="Favorite">
+              <Tab.Screen name="My page">
                 {() => <Favorite setIsLoggedIn={setIsLoggedIn} />}
               </Tab.Screen> :
               <Tab.Screen name="Log in">

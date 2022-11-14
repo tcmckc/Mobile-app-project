@@ -26,7 +26,7 @@ const auth = {
 
         await storage.storeToken(result.data.token);
 
-        return result.data.message;
+        return result.data;
     },
     register: async function register(email: string, password: string) {
         const data = {
