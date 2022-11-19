@@ -11,7 +11,6 @@ import stationModel from '../models/stations.ts';
 
 export default function ShowMap() {
     const [currentLocationMarker, setCurrentLocationMarker] = useState(null);
-    const [delayList, setDelayList] = useState([]);
     const [stationMarker, setStationMarker] = useState([]);
     const [errorMessage, setErrorMessage] = useState(null);
 
@@ -43,37 +42,25 @@ export default function ShowMap() {
         return delayStationList;
     };
 
+    // FIXME: 
+    // setting station marker
     useEffect(() => {
         (async () => {
-            let newList = await getDelayStationList();
-            setDelayList(newList);
+
+            const delayList = await getDelayStationList();
+
+            delayList.map(item => {
+                setStationMarker(<Marker    
+                    coordinate={{
+                        longitude: parseFloat(item.Geometry.WGS84.replace('(', ' ').replace(')', ' ').split(' ')[2]), 
+                        latitude: parseFloat(item.Geometry.WGS84.replace('(', ' ').replace(')', ' ').split(' ')[3]),
+                    }}
+                    title={item.AdvertisedLocationName}
+                    pinColor="orange"
+                />);
+            });
         })();
     }, []);
-
-    // FIXME:
-    // setting station marker
-    console.log(delayList[0]);
-    console.log(333);
-    
-
-    // if(delayList[0] !== undefined) {
-        console.log("hej!");
-        const stationMarkers = delayList.map(item => {
-            console.log(item);
-            console.log(66);
-            <Marker
-                coordinate={{
-                    longitude: parseFloat(item.Geometry.WGS84.replace('(', ' ').replace(')', ' ').split(' ')[2]), 
-                    latitude: parseFloat(item.Geometry.WGS84.replace('(', ' ').replace(')', ' ').split(' ')[3]),
-                }}
-                title={item.AdvertisedLocationName}
-                description={item.EstimatedTimeAtLocation}
-                pinColor="orange"
-            />;
-        });
-    // }
-
-    console.log(stationMarkers[0]);
 
     // setting user's current location marker
     useEffect(() => {
@@ -99,7 +86,7 @@ export default function ShowMap() {
 
     return (
         <View style={Base.base}>
-            <Text style={Typography.header2}>Stations with Delayed Trains</Text>
+            <Text style={Typography.header2}>Delayed trains</Text>
             <View style={styles.container}>
                 <MapView
                     style={styles.map}
@@ -110,13 +97,8 @@ export default function ShowMap() {
                         longitudeDelta: 0.1,
                     }}>
                     {currentLocationMarker}
-                    {stationMarkers}
+                    {stationMarker}
                 </MapView>
-                {console.log(stationMarkers)}
-                {/* {console.log(stationMarkers)} */}
-                {/* {console.log(getStationMarkers())} */}
-                {/* {getStationMarker()} */}
-
             </View>
         </View>
     );

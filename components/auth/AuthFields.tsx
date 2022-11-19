@@ -64,14 +64,16 @@ export default function AuthFields ({ auth, setAuth, submit, title, navigation})
             autoCorrect={false}
             testID="password-field"
         />
+        <View style={Base.btn}>
+            <Button
+                title={title}
+                onPress={() => {
+                    submit();
+                }}
+                accessibilityLabel={`${title} genom att trycka`}
+            />
+        </View>
 
-        <Button
-            title={title}
-            onPress={() => {
-                submit();
-            }}
-            accessibilityLabel={`${title} genom att trycka`}
-        />
         {title === "Logga in" &&
             <Button
                 title="Register"

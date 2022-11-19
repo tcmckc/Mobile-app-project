@@ -2,7 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import { ScrollView, Text } from 'react-native';
 import { Base, Typography } from '../styles';
 import DelayList from './DelayList.tsx';
+import AllStations from './AllStations';
 import Favorites from './Favorites.tsx';
+import AddFavorites from './AddFavorites.tsx';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
@@ -15,7 +17,10 @@ export default function Favorite() {
     return (
         <Stack.Navigator initialRouteName="Favorites">
             <Stack.Screen name="Favorites" component={Favorites} />
-            <Stack.Screen name="Add" component={DelayList} />
+
+            <Stack.Screen name="Stations" component={AllStations} />
+            
+            <Stack.Screen name="Add" component={AddFavorites} />
         </Stack.Navigator>
     );
 }

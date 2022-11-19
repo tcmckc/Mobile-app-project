@@ -14,7 +14,18 @@ export const base = {
 
 export const image = {
     width: "100%",
-    height: "200%",
+    height: "100%",
     // width:340,
     // height:240,
 };
+
+export const btn = {
+    width: "70%",
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 30,
+    elevation: 300,
+    backgroundColor:"#bde4f2",
+}

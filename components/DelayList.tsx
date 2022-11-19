@@ -47,15 +47,11 @@ export default function DelayList({ navigation }) {
         if (item.AdvertisedLocationName !== undefined) {
             return <DataTable.Row key={index}>
             
-                <Button 
-                    setIsLoggedIn={setIsLoggedIn}
-                    key={index} 
-                    onPress={() => { 
-                        navigation.navigate('Details', { item: item });
-                    }}
-                    title={item.EstimatedTimeAtLocation.substring(0,10)}
-                >
-                </Button>
+                <Text style={{paddingTop:10}}>{item.EstimatedTimeAtLocation.substring(0,10)}
+                </Text>
+
+                <Text style={{paddingTop:10, paddingLeft:10}}>{item.EstimatedTimeAtLocation.substring(11,16)}
+                </Text>
 
                 <Button 
                     setIsLoggedIn={setIsLoggedIn}
@@ -66,37 +62,21 @@ export default function DelayList({ navigation }) {
                     title={item.AdvertisedLocationName}
                 >
                 </Button>
+
             </DataTable.Row>
         }
         
-            {/* {isLoggedIn ?
-                <Button
-                    setIsLoggedIn={setIsLoggedIn}
-                    title="♡♡"
-                    onPress={() => {
-                        console.log("♡ pressed")
-                    }}
-                >
-                </Button> :
-                <Button
-                    title="♡"
-                    onPress={() => {
-                        console.log("pressed")
-                    }}
-                >
-                </Button>
-                } */}
-
     });
 
     return (
         <ScrollView style={Base.base}>
-            <Text style={Typography.header2}>Delayed information
+            <Text style={Typography.header2}>Delay List
             </Text>
 
             <DataTable>
                 <DataTable.Header>
                     <DataTable.Title>Date</DataTable.Title>
+                    <DataTable.Title>Time</DataTable.Title>
                     <DataTable.Title>Station name</DataTable.Title>
                 </DataTable.Header>
                 {stationName}

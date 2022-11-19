@@ -1,8 +1,8 @@
 export const header1 = {
-    fontSize: 42,
+    fontSize: 40,
     marginBottom: 28,
-    fontFamily: "Verdana",
-    color: "black",
+    fontFamily: "Futura",
+    color: "green",
     padding: 10,
     textAlign:"center",
 };
@@ -12,7 +12,7 @@ export const header2 = {
     marginTop: 28,
     marginBottom: 28,
     color: "orange",
-    fontFamily: "Verdana"
+    fontFamily: "Futura"
 };
 
 export const header3 = {

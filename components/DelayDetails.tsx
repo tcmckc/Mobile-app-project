@@ -13,7 +13,7 @@ export default function DelayDetails({ route }) {
 
             <Text style={Typography.normal}>Event:  
                 {item.ActivityType}</Text>
-            <Text style={Typography.normal}>Departure date: {item.AdvertisedTimeAtLocation.substring(0,10)}</Text>
+            <Text style={Typography.normal}>Date: {item.AdvertisedTimeAtLocation.substring(0,10)}</Text>
 
             <Text style={Typography.normal}>Former departure time: {item.AdvertisedTimeAtLocation.substring(11,16)}</Text>
 
