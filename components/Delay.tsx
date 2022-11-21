@@ -4,12 +4,15 @@ import DelayDetails from './DelayDetails.tsx';
 
 const Stack = createNativeStackNavigator();
 
-
 export default function Delay() {
     return (
         <Stack.Navigator initialRouteName="List">
-            <Stack.Screen name="List" component={DelayList} />
-            <Stack.Screen name="Details" component={DelayDetails} />
+            
+            <Stack.Screen name="List" component={DelayList}>
+            </Stack.Screen>
+
+            <Stack.Screen name="Details" component={DelayDetails}>
+            </Stack.Screen>
         </Stack.Navigator>
     );
 }

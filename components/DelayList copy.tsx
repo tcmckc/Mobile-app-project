@@ -1,39 +1,50 @@
+import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { ScrollView, Text, Button, View } from 'react-native';
-import { Base, Typography } from '../styles';
+import { Base, Typography, Table } from '../styles';
 import delayModel from '../models/delays.ts';
 import stationModel from '../models/stations.ts';
 import { DataTable } from "react-native-paper";
+import authModel from '../models/auth';
+import delays from '../models/delays';
 
-export default function DelayList({navigation}) {
+export default function DelayList({ navigation }) {
+    const [delays, setDelays] = useState([]);
+    const [stations, setStations] = useState([]);
     const [myList, setMyList] = useState([]);
-
-    async function getDelaysWithName () {
-        const allDelays = await delayModel.getDelays();
-
-        const allDelaysWithFromLocation = [];
-        allDelays.forEach(function (value) {
-                if (value["FromLocation"] !== undefined) {
-                    allDelaysWithFromLocation.push(value);
-                }
-        });
-        return allDelaysWithFromLocation;
-    };
 
     useEffect(() => {
         (async () => {
-            const delays = await getDelaysWithName();
+            const allDelays = await delayModel.getDelays();
 
-            const stations = await stationModel.getStations();
-
-            const newMyList = await delays?.map(item => ({
-                ...stations.find(({ LocationSignature }) =>
-                item.FromLocation[0].LocationName == LocationSignature), ...item
-            }));
-
-            setMyList(newMyList);
-        })()
+            const allDelaysWithFromLocation = [];
+            await allDelays.forEach(function (value) {
+                if (value["FromLocation"] !== undefined) {
+                    allDelaysWithFromLocation.push(value);
+                }
+            });
+            setDelays(allDelaysWithFromLocation);
+        })(); 
     }, []);
+
+    useEffect(() => {
+        (async () => {
+            setStations(await stationModel.getStations());
+        })();
+    }, []);
+
+    useEffect(() => {
+        (async () => {
+            setMyList(await delays.map(item => ({
+                ...stations.find(({ LocationSignature }) =>
+                item.FromLocation[0].LocationName == LocationSignature), ...item})))
+        })();
+    }, []);
+
+    // const delayList = delays.map(item => ({
+    //     ...stations.find(({ LocationSignature }) =>
+    //     item.FromLocation[0].LocationName == LocationSignature), ...item 
+    // }));
 
     const stationName = myList.map((item, index) => {
         if (item.AdvertisedLocationName !== undefined) {
@@ -56,7 +67,7 @@ export default function DelayList({navigation}) {
 
             </DataTable.Row>
         }
-    
+        
     });
 
     return (

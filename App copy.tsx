@@ -25,7 +25,6 @@ const routeIcons = {
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
-  const [myList, setMyList] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -45,26 +44,13 @@ export default function App() {
             tabBarInactiveTintColor: 'gray',
           })}
         >
-          <Tab.Screen name="Home">
-          {() => <Home myList={myList} setMyList={setMyList} />}
-          </Tab.Screen>
-
-          <Tab.Screen name="Delay">
-          {() => <Delay myList={myList} setMyList={setMyList} />}
-          </Tab.Screen>
-
-          <Tab.Screen name="Map">
-          {() => <Map myList={myList} setMyList={setMyList} />}
-          </Tab.Screen>
-
-
-          {/* <Tab.Screen name="Home" component={Home} />
+          <Tab.Screen name="Home" component={Home} />
           <Tab.Screen name="Delay" component={Delay} />
-          <Tab.Screen name="Map" component={Map} /> */}
+          <Tab.Screen name="Map" component={Map} />
 
           {isLoggedIn ?
               <Tab.Screen name="My page">
-                {() => <Favorite setIsLoggedIn={setIsLoggedIn} myList={myList} setMyList={setMyList}/>}
+                {() => <Favorite setIsLoggedIn={setIsLoggedIn} />}
               </Tab.Screen> :
               <Tab.Screen name="Log in">
                 {() => <Auth setIsLoggedIn={setIsLoggedIn} />}
@@ -73,6 +59,14 @@ export default function App() {
 
         </Tab.Navigator>
       </NavigationContainer>
+
+      {/* <View style={Base.base}>
+        <Text>Tågtrafik</Text>
+        <Image source={train} style={{ width: 320, height: 240 }} />
+        <Station />
+        <StatusBar style="auto" />
+      </View> */}
+
       <StatusBar style="auto" />
     <FlashMessage position="top" />
     </SafeAreaView>

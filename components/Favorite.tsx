@@ -9,16 +9,16 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
-//TODO:
-// 駅一覧の画面（お気に入り追加ができる）と、
-// お気に入り一覧の画面（遅延があるかどうか表示）
-
-export default function Favorite() {
+export default function Favorite({myList, setMyList}) {
     return (
         <Stack.Navigator initialRouteName="Favorites">
             <Stack.Screen name="Favorites" component={Favorites} />
 
-            <Stack.Screen name="Stations" component={AllStations} />
+            <Stack.Screen name="Stations" component={AllStations}>
+                
+            {/* 以下で書くと、次の画面でnavigation.navigateが使えない */}
+            {/* {() => <AllStations myList={myList} setMyList={setMyList} />} */}
+            </Stack.Screen>
             
             <Stack.Screen name="Add" component={AddFavorites} />
         </Stack.Navigator>

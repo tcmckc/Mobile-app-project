@@ -7,6 +7,7 @@ import { DataTable } from "react-native-paper";
 export default function AddFavorites ({ navigation, route }) {
     const { item } = route.params;
 
+
     return (
         <View style={Base.base}>
             <Text style={Typography.header2}>Add "{item}" to my favorites

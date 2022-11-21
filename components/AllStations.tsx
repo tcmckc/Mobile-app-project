@@ -6,8 +6,8 @@ import stationModel from '../models/stations.ts';
 import { DataTable } from "react-native-paper";
 
 
-export default function AllStations( { navigation }) {
-    console.log("Mypage station list");
+export default function AllStations( { navigation, myList, setMyList }) {
+
     const [stations, setStations] = useState([]);
 
     useEffect(() => {
@@ -15,6 +15,7 @@ export default function AllStations( { navigation }) {
             setStations(await stationModel.getStations());
         })();
     }, []);
+   
 
     const stationNames = stations.map(item => {
         if (item.AdvertisedLocationName !== undefined) {
