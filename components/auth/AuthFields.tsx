@@ -74,13 +74,15 @@ export default function AuthFields ({ auth, setAuth, submit, title, navigation})
             />
         </View>
 
-        {title === "Logga in" &&
-            <Button
-                title="Register"
-                onPress={() => {
-                    navigation.navigate("Register");
-                }}
-            />
+        {title === "Log in" &&
+            <View style={Base.btn}>
+                <Button
+                    title="Register"
+                    onPress={() => {
+                        navigation.navigate("Register");
+                    }}
+                />
+            </View>
         }
     </View>
     );

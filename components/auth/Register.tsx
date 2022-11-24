@@ -10,7 +10,7 @@ export default function Register({ navigation }) {
         if (auth.email && auth.password) {
             const result = await AuthModel.register(auth.email, auth.password);
             
-            navigation.navigate("Login");
+            navigation.navigate("LogIn");
         }
     }
 
@@ -19,7 +19,7 @@ export default function Register({ navigation }) {
             auth={auth}
             setAuth={setAuth}
             submit={doRegister}
-            title="Registrera"
+            title="Register"
             navigation={navigation}
         />
     );

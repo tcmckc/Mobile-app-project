@@ -6,7 +6,7 @@ import stationModel from '../models/stations.ts';
 import { DataTable } from "react-native-paper";
 
 
-export default function AllStations( { navigation, myList, setMyList }) {
+export default function AllStations( { navigation }) {
 
     const [stations, setStations] = useState([]);
 
@@ -17,19 +17,22 @@ export default function AllStations( { navigation, myList, setMyList }) {
     }, []);
    
 
-    const stationNames = stations.map(item => {
+    const stationNames = stations.map((item, index) => {
         if (item.AdvertisedLocationName !== undefined) {
             return (
-                <DataTable.Cell style={Table.table.cell}>
-                    <Button
-                        title={item.AdvertisedLocationName}
-                        onPress={() => {
-                            navigation.navigate('Add', {
-                                item: item.AdvertisedLocationName
-                            });
-                        }}
-                    />
-                </DataTable.Cell>
+                <DataTable.Row key={index}>
+                    <DataTable.Cell style={Table.table.cell}>
+                        <Button
+                            title={item.AdvertisedLocationName}
+                            onPress={() => {
+                                navigation.navigate('Add', {
+                                    item: item.AdvertisedLocationName
+                                });
+                            }}
+                            key={index}
+                        />
+                    </DataTable.Cell>
+                </DataTable.Row>
             );
         }
     });

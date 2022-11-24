@@ -5,9 +5,10 @@ import { useEffect, useState } from 'react';
 import { DataTable } from 'react-native-paper';
 import delayModel from '../models/delays.ts';
 import stationModel from '../models/stations.ts';
+import storage from "../models/storage";
 
 
-export default function Favorites({ navigation, route }) {
+export default function Favorites({ navigation, route, setIsLoggedIn }) {
     const [favorites, setFavorites] = useState([]);
     const [myList, setMyList] = useState([]);
     const { item } = route.params || {};
@@ -47,53 +48,34 @@ export default function Favorites({ navigation, route }) {
         })();
     }, [item]);
 
-    console.log(favorites);
-    console.log(88)
-
     const delayStations = [];
     myList.map(item => {
         delayStations.push(item.AdvertisedLocationName);
     });
 
-    //TODO: map in mapがダメ？
-    const listOfFavorites = favorites.map(item => {
+    const listOfFavorites = favorites.map((item, index) => {
             if (delayStations.includes(item)){
                 return (
-                    <DataTable.Row>
-                        <Text style={{paddingTop:10}}>{item} </Text>
-                        <Text style={{paddingTop:10, color:"red"}}> (Train Delay!)</Text>
+                    <DataTable.Row key={index}>
+                        <DataTable.Cell style={{paddingTop:10}}>{item} </DataTable.Cell>
+                        <DataTable.Cell style={{paddingTop:10, color:"red"}}> (Train Delay!)</DataTable.Cell>
                     </DataTable.Row>
                 )
             } else {
                 return (
-                    <DataTable.Row>
-                        <Text style={{paddingTop:10}}>{item} </Text>
-                        <Text style={{paddingTop:10}}></Text>
+                    <DataTable.Row key={index}>
+                        <DataTable.Cell style={{paddingTop:10}}>{item} </DataTable.Cell>
+                        <DataTable.Cell style={{paddingTop:10}}></DataTable.Cell>
                     </DataTable.Row>
                 )
 
             }
     });
 
-    // const listOfFavorites = favorites.map(item => {
-    //     myList.map(ii => {
-    //         if (ii.AdvertisedLocationName === item) {
-    //             return (
-    //                 <DataTable.Row>
-    //                     <Text style={{paddingTop:10}}>{item}</Text>
-    //                     <Text style={{paddingTop:10}}></Text>
-    //                 </DataTable.Row>)
-    //         } 
-
-    //         return (<DataTable.Row>
-    //         <Text style={{paddingTop:10}}>{item}</Text>
-    //         <Text style={{paddingTop:10}}></Text>
-    //         </DataTable.Row>)
-    //     })
-    // });
-    
-    console.log(listOfFavorites)
-    console.log(3453453)
+    async function logOut() { 
+        storage.deleteToken();
+        setIsLoggedIn(false);
+    }
 
     return (
         <ScrollView style={Base.base}>
@@ -116,6 +98,14 @@ export default function Favorites({ navigation, route }) {
                         navigation.navigate('Stations', {
                         });
                     }}
+                />
+            </View>
+            <View style={Base.btn}>
+                <Button
+                title="Logga ut"
+                onPress={async () => {
+                    await logOut()
+                }}
                 />
             </View>
         </ScrollView>

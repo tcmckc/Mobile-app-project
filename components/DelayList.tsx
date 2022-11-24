@@ -63,6 +63,8 @@ export default function DelayList({navigation}) {
         <ScrollView style={Base.base}>
             <Text style={Typography.header2}>Delay List
             </Text>
+            <Text>All tain delays in Sweden for the next 14 hours.</Text>
+            <Text></Text>
 
             <DataTable>
                 <DataTable.Header>

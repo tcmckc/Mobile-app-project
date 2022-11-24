@@ -11,10 +11,10 @@ import stationModel from '../models/stations.ts';
 
 export default function ShowMap() {
     const [currentLocationMarker, setCurrentLocationMarker] = useState(null);
-    //const [delayList, setDelayList] = useState([]);
     const [stationMarker, setStationMarker] = useState([]);
     const [errorMessage, setErrorMessage] = useState(null);
     const [myList, setMyList] = useState([]);
+    const markerList = [];
 
     async function getDelaysWithName () {
         const allDelays = await delayModel.getDelays();
@@ -38,102 +38,26 @@ export default function ShowMap() {
                 ...stations.find(({ LocationSignature }) =>
                 item.FromLocation[0].LocationName == LocationSignature), ...item
             }));
-
             setMyList(newMyList);
         })()
     }, []);
 
-    // function getStationList () {
-    //     return stationModel.getStations();
-    // };
-
-    // async function getDelayList () {
-    //     const allDelays = await delayModel.getDelays();
-    //     const allDelaysWithFromLocation = [];
-    //     await allDelays.forEach(function (value) {
-    //         if (value["FromLocation"] !== undefined) {
-    //             allDelaysWithFromLocation.push(value);
-    //         }
-    //     });
-    //     return allDelaysWithFromLocation;
-
-    // };
-
-    // async function getDelayStationList() {
-    //     const stations = await getStationList();
-    //     const delays = await getDelayList();
-
-    //     var delayStationList = await delays.map(item => ({
-    //         ...stations.find(({ LocationSignature }) =>
-    //         item.FromLocation[0].LocationName == LocationSignature), ...item 
-    //     }));
-
-    //     return delayStationList;
-    // };
-
-    // useEffect(() => {
-    //     (async () => {
-    //         let newList = await getDelayStationList();
-    //         setDelayList(newList);
-    //     })();
-    // }, []);
-
-    // async function getDelaysWithName () {
-    //     const allDelays = await delayModel.getDelays();
-
-    //     const allDelaysWithFromLocation = [];
-    //     allDelays.forEach(function (value) {
-    //             if (value["FromLocation"] !== undefined) {
-    //                 allDelaysWithFromLocation.push(value);
-    //             }
-    //     });
-    //     return allDelaysWithFromLocation;
-    // };
-
-    // useEffect(() => {
-    //     (async () => {
-    //         const delays = await getDelaysWithName();
-
-    //         const stations = await stationModel.getStations();
-
-    //         const newMyList = await delays?.map(item => ({
-    //             ...stations.find(({ LocationSignature }) =>
-    //             item.FromLocation[0].LocationName == LocationSignature), ...item
-    //         }));
-
-    //         setMyList(newMyList);
-    //     })()
-    // }, []);
-
-    // FIXME:
-    // setting station marker
-    console.log(myList[0]);
-    console.log(333);
-
-    
-    useEffect(() => {
-        (async () => {
-            if (myList[0] !== undefined){
-                await myList.map((item, index) => {
-                    setStationMarker([...stationMarker,
-                        (<Marker
-                        coordinate={{
-                            longitude: parseFloat(item.Geometry.WGS84.replace('(', ' ').replace(')', ' ').split(' ')[2]), 
-                            latitude: parseFloat(item.Geometry.WGS84.replace('(', ' ').replace(')', ' ').split(' ')[3]),
-                        }}
-                        title={item.AdvertisedLocationName}
-                        description={item.EstimatedTimeAtLocation.substring(11,16)}
-                        pinColor="orange"
-                        key={index}
-                    />)]);
-                })
-            }
-        })();
-    }, [myList]);
-
-
-    console.log(stationMarker);
-    console.log(44);
+    if (myList[0] !== undefined) {
+        myList.map((item, index) => {
+            markerList.push(
+                <Marker
+                    coordinate={{
+                        longitude: parseFloat(item.Geometry.WGS84.replace('(', ' ').replace(')', ' ').split(' ')[2]), 
+                        latitude: parseFloat(item.Geometry.WGS84.replace('(', ' ').replace(')', ' ').split(' ')[3]),
+                    }}
+                    title={item.AdvertisedLocationName}
+                    description={item.EstimatedTimeAtLocation.substring(11,16)}
+                    pinColor="yellow"
+                    key={index}
+                />
+            );
+        });
+    }
 
     // setting user's current location marker
     useEffect(() => {
@@ -169,6 +93,7 @@ export default function ShowMap() {
                         latitudeDelta: 0.1,
                         longitudeDelta: 0.1,
                     }}>
+                    {markerList}
                     {stationMarker}
                     {currentLocationMarker}
                 </MapView>

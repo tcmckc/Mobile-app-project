@@ -21,6 +21,7 @@ export const image = {
 
 export const btn = {
     width: "70%",
+    margin: 10,
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 5,
