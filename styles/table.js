@@ -22,7 +22,7 @@ export const table = {
     },
     cell: {
         overflow: 'scroll',
-        paddingRight: 50,
+        textAlign: 'left',
         whiteSpace: 'nowrap',
     }
 };

@@ -58,14 +58,14 @@ export default function Favorites({ navigation, route, setIsLoggedIn }) {
                 return (
                     <DataTable.Row key={index}>
                         <DataTable.Cell style={{paddingTop:10}}>{item} </DataTable.Cell>
-                        <DataTable.Cell style={{paddingTop:10, color:"red"}}> (Train Delay!)</DataTable.Cell>
+                        <DataTable.Cell style={{paddingTop:10}}>Train delay!</DataTable.Cell>
                     </DataTable.Row>
                 )
             } else {
                 return (
                     <DataTable.Row key={index}>
                         <DataTable.Cell style={{paddingTop:10}}>{item} </DataTable.Cell>
-                        <DataTable.Cell style={{paddingTop:10}}></DataTable.Cell>
+                        <DataTable.Cell style={{paddingTop:10}}>No delay</DataTable.Cell>
                     </DataTable.Row>
                 )
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ScrollView, Text, Button, View } from 'react-native';
-import { Base, Typography } from '../styles';
+import { Base, Table, Typography } from '../styles';
 import delayModel from '../models/delays.ts';
 import stationModel from '../models/stations.ts';
 import { DataTable } from "react-native-paper";
@@ -39,20 +39,22 @@ export default function DelayList({navigation}) {
         if (item.AdvertisedLocationName !== undefined) {
             return <DataTable.Row key={index}>
             
-                <Text style={{paddingTop:10}}>{item.EstimatedTimeAtLocation.substring(0,10)}
-                </Text>
+                <DataTable.Cell style={Table.cell}>{item.EstimatedTimeAtLocation.substring(0,10)}
+                </DataTable.Cell>
 
-                <Text style={{paddingTop:10, paddingLeft:10}}>{item.EstimatedTimeAtLocation.substring(11,16)}
-                </Text>
+                <DataTable.Cell style={Table.cell}>{item.EstimatedTimeAtLocation.substring(11,16)}
+                </DataTable.Cell>
 
-                <Button
-                    key={index} 
-                    onPress={() => { 
-                        navigation.navigate('Details', { item: item });
-                    }}
-                    title={item.AdvertisedLocationName}
-                >
-                </Button>
+                <DataTable.Cell style={Table.cell}>
+                    <Button
+                        key={index} 
+                        onPress={() => { 
+                            navigation.navigate('Details', { item: item });
+                        }}
+                        title={item.AdvertisedLocationName}
+                    >
+                    </Button>
+                </DataTable.Cell>
 
             </DataTable.Row>
         }

@@ -1,5 +1,4 @@
 import { StatusBar } from 'expo-status-bar';
-//import { Image, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -56,11 +55,6 @@ export default function App() {
           <Tab.Screen name="Map">
           {() => <Map myList={myList} setMyList={setMyList} />}
           </Tab.Screen>
-
-
-          {/* <Tab.Screen name="Home" component={Home} />
-          <Tab.Screen name="Delay" component={Delay} />
-          <Tab.Screen name="Map" component={Map} /> */}
 
           {isLoggedIn ?
               <Tab.Screen name="My page">
