@@ -12,3 +12,4 @@ This app containing a list and a map view of all train delays in Sweden, registe
 
 ## Installation
     Run "expo start" to start the app
+# mobile-app
