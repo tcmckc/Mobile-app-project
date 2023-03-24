@@ -1,5 +1,7 @@
 {
-    "api_key": "22882c6355b8be9ceebc0105443b8cc7",
+    "api_key": "",
     "base_url": "https://trafik.emilfolino.se",
     "auth_url": "https://auth.emilfolino.se"
 }
+
+// Get api_key at https://auth.emilfolino.se and fill in the above
