@@ -3,5 +3,3 @@
     "base_url": "https://trafik.emilfolino.se",
     "auth_url": "https://auth.emilfolino.se"
 }
-
-// Get api_key at https://auth.emilfolino.se and fill in the above
