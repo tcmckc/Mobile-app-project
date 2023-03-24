@@ -7,6 +7,7 @@ This app containing a list and a map view of all train delays in Sweden, registe
 ## Prerequisites
     React Native
     Expo
+    Api-key (Get api_key at https://auth.emilfolino.se and fill in config/config.json)
     
 
 ## Installation
